@@ -79,20 +79,21 @@ def _build_navgraph(sim, pathfinder, settings, threshold):
     # return G.subgraph(largest_cc)
     return G
 
-
-def _make_sensor(sensor_type, width=640, height=360, hfov=90.0, camera_height=0.0):
+# [FIXED]: 添加了 camera_tilt_rad 参数，并将倾斜角应用到相机的 spec.orientation
+def _make_sensor(sensor_type, width=640, height=360, hfov=90.0, camera_height=0.0, camera_tilt_rad=0.0):
     spec = habitat_sim.CameraSensorSpec()
     spec.uuid = str(sensor_type)
     spec.sensor_type = sensor_type
     spec.resolution = [height, width]
     spec.position = [0.0, camera_height, 0.0]
-    spec.orientation = [0.0, 0.0, 0.0]
+    # 在传感器的局部坐标系中进行 X 轴（Pitch）旋转
+    spec.orientation = [camera_tilt_rad, 0.0, 0.0] 
     spec.hfov = hfov
     spec.sensor_subtype = habitat_sim.SensorSubType.PINHOLE
     return spec
 
-
-def _make_habitat_config(scene, dataset_type='train', scene_type='mp3d', camera_height=0.0, width=640, height=360, agent_z_offset=0.0, agent_radius=0.1, hfov=90.0, sim_gpu=0):
+# [FIXED]: 添加了 camera_tilt_rad 参数，并传递给 _make_sensor
+def _make_habitat_config(scene, dataset_type='train', scene_type='mp3d', camera_height=0.0, camera_tilt_rad=0.0, width=640, height=360, agent_z_offset=0.0, agent_radius=0.1, hfov=90.0, sim_gpu=-1):
     sim_cfg = habitat_sim.SimulatorConfiguration()
     path = scene.parent.parent
     if scene_type=='mp3d':
@@ -107,9 +108,13 @@ def _make_habitat_config(scene, dataset_type='train', scene_type='mp3d', camera_
     sim_cfg.scene_id = str(scene)
     sim_cfg.enable_physics = True
     sim_cfg.allow_sliding = False
+    # sim_cfg.use_gpu = (sim_gpu >= 0)  
+    # sim_cfg.window_type = "headless"  
+    # sim_cfg.requires_textures = True  
 
     sensor_specs = [
-        _make_sensor(x, camera_height=camera_height, width=width, height=height, hfov=hfov)
+        # 传递倾斜角
+        _make_sensor(x, camera_height=camera_height, camera_tilt_rad=camera_tilt_rad, width=width, height=height, hfov=hfov)
         for x in [
             habitat_sim.SensorType.COLOR,
             habitat_sim.SensorType.DEPTH,
@@ -205,11 +210,12 @@ def _camera_point_from_habitat(p_ah, z_offset=1.5):
 
     return p_bw
 
-def _angle_to_rotation_habitat(angle, camera_tilt_deg):
-    camera_tilt = camera_tilt_deg * np.pi / 180
+# [FIXED]: 删除了加在底盘上的俯仰角（Pitch）。这里仅保留水平面的偏航角（Yaw）。
+# 保持了传入 camera_tilt_deg 参数以免破坏外部调用接口。
+def _angle_to_rotation_habitat(angle, camera_tilt_deg=0.0):
     rotation_xyzw = quat_to_coeffs(
             quat_from_angle_axis(angle, np.array([0, 1, 0]))
-            * quat_from_angle_axis(camera_tilt, np.array([1, 0, 0]))
+            # 删除了 * quat_from_angle_axis(camera_tilt, np.array([1, 0, 0]))
         ).tolist()
     return rotation_xyzw
 
@@ -232,17 +238,21 @@ class HabitatInterface:
 
         # TODO(nathan) expose some of this via the data interface
         _set_logging()
+        
+        # [FIXED]: 传入 camera_tilt_rad
         config, camera_info = _make_habitat_config(
             scene, 
             scene_type=cfg.scene_type, 
             dataset_type=cfg.dataset_type,
             camera_height=cfg.camera_height,
+            camera_tilt_rad=self._camera_tilt, 
             width=cfg.img_width, 
             height=cfg.img_height,
             agent_z_offset=cfg.agent_z_offset, 
             agent_radius=0.1, 
             hfov=cfg.hfov,
-            sim_gpu=cfg.sim_gpu)
+            sim_gpu=-1)
+            
         self._house_path = scene.parent / f"{scene.stem}.house"
         self._camera_info = camera_info
         self.intrinsics = np.array([
@@ -465,15 +475,25 @@ class HabitatInterface:
         )
         return poses
     
-    def get_init_poses_eqa(self, pos_hab, angle, camera_tilt_deg):
+    def get_init_poses_eqa(self, pos_hab, angle, camera_tilt_deg=0.0):
         # pose is in habitat frame, return (pose, quat_wxyz)
-        quat_habitat_xyzw = _angle_to_rotation_habitat(angle, camera_tilt_deg)
-        quat_habitat_wxyz = np.roll(quat_habitat_xyzw, 1)
-
         poses = []
-        dt = 0.2
-        for i in range(10):
+        dt = 0.1  # 稍微缩小时间间隔，确保帧率够高
+        
+        # ==========================================================
+        # [修复卡退]：平滑旋转 360 度，分成 36 帧，每帧只转 10 度
+        # 这样能保证相邻两帧有足够的画面重叠，防止底层 SLAM(Hydra) 丢失追踪而崩溃
+        # ==========================================================
+        num_steps = 36  
+        for i in range(num_steps):
+            # 每次只转 10 度 (2*pi / 36)
+            current_angle = angle + i * (2 * np.pi / num_steps)
+            
+            quat_habitat_xyzw = _angle_to_rotation_habitat(current_angle, camera_tilt_deg)
+            quat_habitat_wxyz = np.roll(quat_habitat_xyzw, 1)
+            
             poses.append((int(i*dt*1e9), pos_hab, quat_habitat_wxyz))
+            
         return poses
 
 
@@ -496,14 +516,14 @@ class HabitatInterface:
         self._obs = self._sim.get_sensor_observations()
         self._labels = None
 
+    # [FIXED]: 底盘本身已经不再包含 Tilt，所以我们不再需要计算逆旋转抵消，直接返回 Yaw 即可。
     def get_heading_angle(self):
         agent = self._sim.get_agent(0)
         current_quat = agent.get_state().rotation
         
-        quat_camera_tilt = quat_from_angle_axis(self._camera_tilt, np.array([1, 0, 0]))
-        quat_heading_xyzw = quat_to_coeffs(current_quat*quat_camera_tilt.inverse())
+        # 直接使用当前的旋转四元数（此时只包含 Yaw）
+        quat_heading_xyzw = quat_to_coeffs(current_quat)
         heading_angle = 2 * np.arctan2(quat_heading_xyzw[1], quat_heading_xyzw[3])
-        # heading_angle = R.from_quat(quat_to_coeffs(agent.get_state().rotation)).as_euler('xyz', degrees=False)[1]
         return heading_angle
     
     def get_state(self, is_eqa=False):

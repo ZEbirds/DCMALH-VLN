@@ -127,6 +127,7 @@ class SceneGraphSim:
         nearby = np.linalg.norm(frontier_node_positions - agent_pos, axis=-1) < 2.0
         return np.logical_and(in_plane, nearby)
 
+
     def _build_sg_from_hydra_graph(self):
         self.filtered_netx_graph = nx.DiGraph()
 
@@ -193,22 +194,6 @@ class SceneGraphSim:
 
             if 'p' in node.id.category.lower():
                 self._region_node_ids.append(nodeid)
-                
-                # =====================================================================
-                # [新增] 提取 Hydra 原生边界体素数据，作为该 Region 的基础探索度
-                # =====================================================================
-                try:
-                    num_f_voxels = getattr(node.attributes, 'num_frontier_voxels', 0)
-                    is_active_f = getattr(node.attributes, 'active_frontier', False)
-                except AttributeError:
-                    num_f_voxels = 0
-                    is_active_f = False
-                
-                attr['num_frontier_voxels'] = num_f_voxels
-                attr['is_active_frontier'] = is_active_f
-                # 初始化该区域的探索度（体素数量越多，代表未知空间越大）
-                attr['exploration_degree'] = float(num_f_voxels)
-                # =====================================================================
 
             # if 'f' in node.id.category.lower():
             #     if self.is_relevant_frontier(np.array(attr['position']), self.curr_agent_pos)[0]:
@@ -233,7 +218,6 @@ class SceneGraphSim:
         }
         if self.rr_logger is not None:
             self.rr_logger.log_bb_data(self.bb_info)
-            
         ## Adding edges
         for edge in chain(self.pipeline.graph.edges, self.pipeline.graph.dynamic_interlayer_edges):
             source_node = self.pipeline.graph.get_node(edge.source)
@@ -272,15 +256,6 @@ class SceneGraphSim:
             self.filtered_obj_positions = np.array(self.filtered_obj_positions)
             self.filtered_obj_ids = np.array(self.filtered_obj_ids)
             self._frontier_node_ids = []
-            
-            # =====================================================================
-            # [新增] 获取所有已注册 Region 节点的坐标，用于匹配外部 Frontier 点
-            # =====================================================================
-            region_positions = []
-            if len(self._region_node_ids) > 0:
-                region_positions = np.array([self.filtered_netx_graph.nodes[r]['position'] for r in self._region_node_ids])
-            # =====================================================================
-
             for i in range(frontier_nodes.shape[0]):
                 attr={}
                 attr['position'] = list(frontier_nodes[i])
@@ -289,61 +264,6 @@ class SceneGraphSim:
                 nodeid = f'frontier_{i}'
                 self._frontier_node_ids.append(nodeid)
                 self.filtered_netx_graph.add_nodes_from([(nodeid, attr)])
-                
-                # # =====================================================================
-                # # [新增] 找到距离该 Frontier 最近的 Region，并叠加探索度权重
-                # # =====================================================================
-                # if len(region_positions) > 0:
-                #     dist_to_regions = np.linalg.norm(region_positions - frontier_nodes[i], axis=1)
-                #     nearest_region_idx = np.argmin(dist_to_regions)
-                #     nearest_region_id = self._region_node_ids[nearest_region_idx]
-                    
-                #     # 假设每个外部识别到的明确前沿点，给它所属的 Region 增加 50 的探索度权重
-                #     # (这个值 50.0 可以根据你的 Agent 倾向于大范围还是小范围探索进行微调)
-                #     current_degree = self.filtered_netx_graph.nodes[nearest_region_id].get('exploration_degree', 0.0)
-                #     self.filtered_netx_graph.nodes[nearest_region_id]['exploration_degree'] = current_degree + 50.0
-                    
-                #     # 将外部前沿节点和区域连起来
-                #     self.filtered_netx_graph.add_edges_from([(
-                #         nearest_region_id, nodeid,
-                #         {'source_name': 'region', 'target_name': 'frontier', 'type': 'region-to-frontier'}
-                #     )])
-                # # =====================================================================
-                # =====================================================================
-                # [新增+硬核诊断] 找到距离该 Frontier 最近的 Region，并叠加探索度权重
-                # =====================================================================
-                if len(region_positions) > 0:
-                    dist_to_regions = np.linalg.norm(region_positions - frontier_nodes[i], axis=1)
-                    nearest_region_idx = np.argmin(dist_to_regions)
-                    nearest_region_id = self._region_node_ids[nearest_region_idx]
-                    min_dist = dist_to_regions[nearest_region_idx] # 获取真实物理距离
-                    
-                    # 🔍 诊断 1：看匹配的物理距离是否正常
-                    # print(f"🔗 [SG 诊断] 前沿点 {nodeid} 匹配到区域 {nearest_region_id}，物理距离: {min_dist:.2f}米")
-                    
-                    # 只有当区域距离前沿点不是“离谱的远”（比如小于 5.0 米）时，我们才认为它是属于这个区域的
-                    if min_dist < 5.0:
-                        current_degree = self.filtered_netx_graph.nodes[nearest_region_id].get('exploration_degree', 0.0)
-                        self.filtered_netx_graph.nodes[nearest_region_id]['exploration_degree'] = current_degree + 50.0
-                        
-                        # 将外部前沿节点和区域连起来
-                        self.filtered_netx_graph.add_edges_from([(
-                            nearest_region_id, nodeid,
-                            {'source_name': 'region', 'target_name': 'frontier', 'type': 'region-to-frontier'}
-                        )])
-                        
-                        # 🔍 诊断 2：验证图结构里这条边到底有没有被成功写入
-                        # if self.filtered_netx_graph.has_edge(nearest_region_id, nodeid):
-                        #     print(f"✅ [SG 诊断] 图结构连线成功: {nearest_region_id} -> {nodeid}")
-                        # else:
-                        #     print(f"❌ [SG 诊断] 致命错误！NetworkX 连线失败: {nearest_region_id} -> {nodeid}")
-                    # else:
-                    #     print(f"⚠️ [SG 诊断] 距离 {min_dist:.2f}米 太远了！拒绝将 {nodeid} 连入 {nearest_region_id}")
-
-                # else:
-                #     # 🔍 诊断 3：看看是不是底层压根没把 Region 传上来
-                #     print(f"💀 [SG 诊断] 完蛋了，场景图里目前没有任何 Region 节点，{nodeid} 沦为孤儿节点！")
-                # =====================================================================
 
                 dist = np.linalg.norm((np.array(frontier_nodes[i]) - self.filtered_obj_positions), axis=1)
                 relevant_objs = dist < self.thresh
@@ -364,33 +284,6 @@ class SceneGraphSim:
                         )])
                         if self.rr_logger is not None:
                             self.rr_logger.log_hydra_graph(is_node=False, edge_type=edge_type, edgeid=edgeid, node_pos_source=frontier_nodes[i], node_pos_target=obj_pos)
-
-    # =====================================================================
-    # [新增] 专门提供给 Agent 的全局探索接口
-    # =====================================================================
-    def get_top_exploration_regions(self, top_k=3):
-        """
-        获取当前场景图中探索度最高的 K 个区域节点。
-        Agent 可以调用此方法来决定下一个全局导航目标。
-        
-        Returns:
-            list of tuples: [(region_id, exploration_degree, position), ...]
-        """
-        exploration_candidates = []
-        for r_id in self._region_node_ids:
-            if r_id in self.filtered_netx_graph.nodes:
-                node_data = self.filtered_netx_graph.nodes[r_id]
-                degree = node_data.get('exploration_degree', 0.0)
-                
-                # 过滤掉完全探索完毕的区域
-                if degree > 0:
-                    exploration_candidates.append((r_id, degree, node_data['position']))
-                
-        # 按探索度降序排序
-        exploration_candidates.sort(key=lambda x: x[1], reverse=True)
-        
-        return exploration_candidates[:top_k]
-    # =====================================================================
 
     def add_room_labels_to_sg(self):
         self._room_names = []
@@ -514,8 +407,6 @@ class SceneGraphSim:
         if not self.include_regions:
             self.remove_region_nodes()
 
-        self.save_enhanced_json()
-
     def get_position_from_id(self, nodeid):
         return np.array(self.filtered_netx_graph.nodes[nodeid]['position'])
 
@@ -550,9 +441,7 @@ class SceneGraphSim:
         return None
 
     def save_best_image(self, imgs_rgb):
-        if not imgs_rgb or len(imgs_rgb) == 0:
-            return
-        
+
         img_idx = 0
         while (self.output_path / f'current_img_{img_idx}.png').exists():
             img_idx += 1
@@ -566,11 +455,6 @@ class SceneGraphSim:
             num_black_pixels = np.sum(black_pixels_mask, axis=(1, 2))
             useful_img_idxs = num_black_pixels < 0.3*w*h
             useful_imgs = imgs_rgb[useful_img_idxs]
-
-            if len(useful_imgs) == 0:
-                print("⚠️ 警告: 所有图像均被过滤，跳过嵌入计算。")
-                return
-
             sampled_images = useful_imgs[::self.sg_cfg.img_subsample_freq]
 
             padding = True if self.sg_cfg.key_frame_selection.use_clip_for_images else "max_length" # HuggingFace says SigLIP was trained on "max_length"
@@ -670,131 +554,3 @@ class SceneGraphSim:
                     'type': edge_type}
                 )])
             self.filtered_netx_graph.remove_nodes_from(place_ids)
-
-    # =====================================================================
-    # [新增]: 智能探索评估支撑函数 (Context-Aware Active Exploration)
-    # =====================================================================
-
-    def get_objects_near_frontier(self, f_id, radius=2.0):
-        """
-        获取前沿点附近一定半径内的已知物体名称列表 (Context Objects)。
-        用于计算局部上下文语义潜力。
-        """
-        if f_id not in self.filtered_netx_graph:
-            return []
-        
-        nearby_objects = []
-        # 1. 尝试利用已有的拓扑边 (我们在 update_frontier_nodes 连了 frontier-to-object)
-        for neighbor in self.filtered_netx_graph.neighbors(f_id):
-            if 'object' in neighbor:
-                obj_name = self.filtered_netx_graph.nodes[neighbor].get('name', 'unknown')
-                if obj_name not in self.filter_out_objects:
-                    nearby_objects.append(obj_name)
-                    
-        # 2. 物理几何距离兜底 (防止因为阈值或建图瑕疵没连上边)
-        if not nearby_objects:
-            f_pos = np.array(self.filtered_netx_graph.nodes[f_id]['position'])
-            for obj_id in self._object_node_ids:
-                if obj_id in self.filtered_netx_graph.nodes:
-                    obj_pos = np.array(self.filtered_netx_graph.nodes[obj_id]['position'])
-                    if np.linalg.norm(f_pos - obj_pos) < radius:
-                        obj_name = self.filtered_netx_graph.nodes[obj_id].get('name', 'unknown')
-                        if obj_name not in self.filter_out_objects:
-                            nearby_objects.append(obj_name)
-                            
-        return list(set(nearby_objects))
-
-    def get_room_for_frontier(self, f_id):
-        """
-        拓扑追溯：获取前沿点所属的房间 ID 和房间名称。
-        有向图链路：Room -> Region -> Frontier
-        """
-        if f_id not in self.filtered_netx_graph:
-            return None, "unknown"
-            
-        # 在有向图(DiGraph)中，边是 Region -> Frontier，所以要反向找前驱节点 (predecessors)
-        for pred in self.filtered_netx_graph.predecessors(f_id):
-            if 'region' in pred:
-                # 找到 Region 后，继续反向向上找 Room (边是 Room -> Region)
-                for room_pred in self.filtered_netx_graph.predecessors(pred):
-                    if 'room' in room_pred:
-                        room_name = self.filtered_netx_graph.nodes[room_pred].get('name', 'unknown')
-                        # 如果没有语义名称，直接显示 room_id 方便调试
-                        if room_name == 'room':
-                            room_name = room_pred
-                        return room_pred, room_name
-                        
-            # [防断链兜底]: 如果代码配置了 include_regions=False，Frontier 可能会直接连在 Room 上
-            elif 'room' in pred:
-                room_name = self.filtered_netx_graph.nodes[pred].get('name', 'unknown')
-                if room_name == 'room':
-                    room_name = pred
-                return pred, room_name
-                        
-        return None, "unknown"
-    
-    def get_room_unexplored_ratio(self, room_id):
-        """
-        计算房间的剩余探索价值 (Room Remaining Value)。
-        基于我们在 Hydra 建图节点提取的 exploration_degree (未探索边界体素量)。
-        """
-        if not room_id or room_id not in self.filtered_netx_graph:
-            return 0.0
-            
-        total_unexplored_voxels = 0.0
-        # 遍历该房间下的所有区域 (Region)
-        for child in self.filtered_netx_graph.successors(room_id):
-            if 'region' in child:
-                # 累加该房间内所有区域包含的未探索体素
-                total_unexplored_voxels += self.filtered_netx_graph.nodes[child].get('exploration_degree', 0.0)
-                
-        # 这个值越大，说明这个房间没被扫过的体积越大，越值得去
-        return total_unexplored_voxels
-
-    def get_frontier_ig(self, f_id):
-        """
-        获取单个前沿点的瞬时信息增益 (Information Gain - IG)。
-        由于没有直接调用 TSDF 的 Raycast 视锥模拟，我们使用一种极为有效的几何启发式近似：
-        "开阔度推断" —— 如果一个边界周围的障碍物/已知物体越少，它背后的未知空间通常越大。
-        """
-        if f_id not in self.filtered_netx_graph:
-            return 1.0
-            
-        # 获取 1.5 米内的障碍物/物体数量
-        nearby_objs = self.get_objects_near_frontier(f_id, radius=1.5)
-        
-        # 基础增益设为 10.0，周围每多一个物体（越狭窄/拥挤），增益扣除 1.5
-        ig_score = 10.0 - len(nearby_objs) * 1.5 
-        return max(1.0, float(ig_score))  # 确保 IG 最小也有 1.0 的保底价值
-
-    def save_enhanced_json(self):
-        """将包含大模型语义名字、前沿点的完美图谱保存为 JSON"""
-        data = nx.node_link_data(self.filtered_netx_graph)
-        
-        # 重新打包格式，使其与底层 Hydra 的格式完美兼容，可视化脚本无需修改即可直接读取
-        formatted_nodes = []
-        for n in data.get('nodes', []):
-            node_id = n.get('id')
-            formatted_node = {
-                'id': str(node_id), # 现在 ID 变成了直观的 "room_1", "object_12"
-                'layer': n.get('layer', 2),
-                'attributes': {k: v for k, v in n.items() if k not in ['id', 'layer']}
-            }
-            formatted_nodes.append(formatted_node)
-            
-        formatted_edges = []
-        for e in data.get('links', []):
-            formatted_edges.append({
-                'source': str(e.get('source')),
-                'target': str(e.get('target'))
-            })
-            
-        final_data = {
-            'nodes': formatted_nodes,
-            'edges': formatted_edges
-        }
-        
-        # 保存为新的 enhanced_dsg.json
-        save_path = self.output_path / "enhanced_dsg.json"
-        with open(save_path, "w", encoding="utf-8") as f:
-            json.dump(final_data, f, indent=2, ensure_ascii=False)

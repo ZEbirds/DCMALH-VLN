@@ -1149,3 +1149,56 @@ class TSDFPlanner:
             if random.random() < 0.5:
                 direction *= -1
         return direction
+    
+    def get_frontiers(self):
+        """
+        Retrieve the unexplored frontiers in world coordinates (Nx3 array, where N is the number of frontiers).
+        These are clustered and filtered points from the last update() call.
+        Returns an empty array if no frontiers are available (e.g., no update() called yet).
+        """
+        if hasattr(self, 'frontier_to_sample_normal') and self.frontier_to_sample_normal is not None:
+            return self.frontier_to_sample_normal  # Clustered, world-coordinate frontiers
+        else:
+            logging.warning("No frontiers computed yet. Call update() first.")
+            return np.array([])
+
+    def visualize_with_open3d(self, extract_mesh=True):
+        """
+        使用Open3D进行3D可视化（需要安装open3d）
+        """
+        try:
+            import open3d as o3d
+        except ImportError:
+            print("Open3D not installed. Install with: pip install open3d")
+            return
+        
+        if extract_mesh:
+            # 提取网格
+            verts, faces, norms, colors = self.get_mesh()
+            
+            # 创建Open3D网格
+            mesh = o3d.geometry.TriangleMesh()
+            mesh.vertices = o3d.utility.Vector3dVector(verts)
+            mesh.triangles = o3d.utility.Vector3iVector(faces)
+            mesh.vertex_normals = o3d.utility.Vector3dVector(norms)
+            mesh.vertex_colors = o3d.utility.Vector3dVector(colors/255.0)
+            
+            # 可视化
+            # o3d.visualization.draw_geometries([mesh])
+            o3d.io.write_triangle_mesh("debug_tsdf_map.ply", mesh)
+            print("✅ 成功将 TSDF 地图保存为 debug_tsdf_map.ply！")
+        else:
+            # 提取点云
+            pc = self.get_point_cloud()
+            points = pc[:, :3]
+            colors = pc[:, 3:] / 255.0
+            
+            # 创建Open3D点云
+            pcd = o3d.geometry.PointCloud()
+            pcd.points = o3d.utility.Vector3dVector(points)
+            pcd.colors = o3d.utility.Vector3dVector(colors)
+            
+            # 可视化
+            # o3d.visualization.draw_geometries([pcd])
+            o3d.io.write_point_cloud("debug_tsdf_map.ply", pcd)
+            print("✅ 成功将 TSDF 地图保存为 debug_tsdf_map.ply！")

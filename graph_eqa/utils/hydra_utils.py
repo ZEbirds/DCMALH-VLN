@@ -69,6 +69,13 @@ def load_configs(
             "show_stats": False,
             "pose_graphs": {"make_pose_graph": True},
         },
+        "backend": {
+            "room_finder": {
+                "cluster_radius": 0.5,     # 聚类半径 (默认通常是1.0或1.5，调小可以把大房间切碎)
+                "min_room_size": 3,        # 成为一个独立房间的最少节点数 (调小，允许生成小储藏室/小走廊)
+                "max_distance": 0.8        # 节点之间的最大连通距离 (调小防粘连)
+            }
+        },
     }
     configs.add_yaml(yaml.dump(overrides))
     return configs
