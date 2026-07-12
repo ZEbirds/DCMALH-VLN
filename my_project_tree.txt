@@ -1,0 +1,193 @@
+.
+├── cfg
+│   ├── baseline.yaml
+│   ├── explore_eqa_dataset_enrich_labels.yaml
+│   ├── grapheqa_habitat.yaml
+│   ├── grapheqa_hmeqa_habitat.yaml
+│   ├── grapheqa_openeqa_habitat.yaml
+│   ├── grapheqa_stretch.yaml
+│   ├── label_spaces
+│   │   ├── hm3d_label_space.yaml
+│   │   └── myhome_label_space.yaml
+│   ├── lhpr_vln_verify.yaml
+│   ├── open-eqa-choices.json
+│   ├── openeqa_init_trajs.json
+│   ├── real_world_questions.yaml
+│   ├── stretch_interface.yaml
+│   ├── wo_frontier_score.yaml
+│   ├── wo_memory.yaml
+│   ├── wo_safety_filter.yaml
+│   └── wo_scene_graph.yaml
+├── debug_tsdf_map.ply
+├── doc
+│   └── grapheqa.gif
+├── docker
+│   ├── docker_build.sh
+│   ├── docker_build_with_habitat.sh
+│   ├── docker_pull.sh
+│   ├── docker_run_habitat.sh
+│   ├── docker_run.sh
+│   └── docker_tag.sh
+├── Dockerfile
+├── Dockerfile_habitat
+├── example.py
+├── force_egl_device.c
+├── graph_eqa
+│   ├── detection
+│   │   ├── configs
+│   │   ├── detic_segmenter.py
+│   │   └── grounded_sam2.py
+│   ├── envs
+│   │   ├── habitat_interface.py
+│   │   ├── habitat.py
+│   │   ├── trajectory.py
+│   │   └── utils.py
+│   ├── __init__.py
+│   ├── logging
+│   │   ├── rr_logger.py
+│   │   └── utils.py
+│   ├── occupancy_mapping
+│   │   ├── geom.py
+│   │   └── tsdf.py
+│   ├── planners
+│   │   ├── Ablation_study_planner.py
+│   │   ├── backup_latest.py
+│   │   ├── __init__.py
+│   │   ├── vlm_planner_claude.py
+│   │   ├── vlm_planner_gemini.py
+│   │   ├── vlm_planner_gpt.py
+│   │   ├── vlm_planner_lhpr_vln_gpt_3.25.py
+│   │   ├── vlm_planner_lhpr_vln_gpt_4.29.py
+│   │   ├── vlm_planner_lhpr_vln_gpt_backup.py
+│   │   ├── vlm_planner_lhpr_vln_gpt_backupup_fast.py
+│   │   ├── vlm_planner_lhpr_vln_gpt.py
+│   │   └── vlm_planner_llama.py
+│   ├── Recorder
+│   │   ├── __init__.py
+│   │   └── Recorder.py
+│   ├── scene_graph
+│   │   ├── scene_graph_sim.py
+│   │   └── scene_graph_sim_without exploration degree.py
+│   ├── stretch_ai_agent
+│   │   ├── robot_hydra_agent.py
+│   │   └── utils.py
+│   └── utils
+│       ├── dataloading_utils.py
+│       ├── data_utils_backup.py
+│       ├── data_utils.py
+│       ├── hydra_utils.py
+│       └── __init__.py
+├── graph_eqa.egg-info
+│   ├── dependency_links.txt
+│   ├── PKG-INFO
+│   ├── requires.txt
+│   ├── SOURCES.txt
+│   └── top_level.txt
+├── LH-VLN
+│   ├── configs
+│   │   ├── lh_vln.yaml
+│   │   └── model.yaml
+│   ├── contest
+│   │   ├── DetailedDescription.md
+│   │   ├── imgs
+│   │   ├── index.html
+│   │   ├── jemdoc.css
+│   │   ├── jquery-1.12.4.min.js
+│   │   ├── metrics.md
+│   │   ├── pic
+│   │   ├── public
+│   │   ├── README.md
+│   │   └── videos
+│   ├── habitat_base
+│   │   ├── config.py
+│   │   ├── __init__.py
+│   │   ├── simulation.py
+│   │   ├── top_down.py
+│   │   └── visualization.py
+│   ├── index.html
+│   ├── LHPR-VLN
+│   │   ├── batch_1.zip
+│   │   ├── batch_2.zip
+│   │   ├── batch_3.zip
+│   │   ├── batch_4.zip
+│   │   ├── batch_5.zip
+│   │   ├── batch_6.zip
+│   │   ├── batch_7.zip
+│   │   ├── batch_8.zip
+│   │   ├── episode_task.zip
+│   │   ├── huggingface
+│   │   ├── README_CN.md
+│   │   ├── README.md
+│   │   ├── step_task.zip
+│   │   └── task.zip
+│   ├── nav_gen
+│   │   ├── dataset_gen.py
+│   │   ├── dataset.py
+│   │   ├── gpt.py
+│   │   ├── habitat_base
+│   │   ├── main.py
+│   │   ├── prompt
+│   │   ├── README.md
+│   │   ├── recognize_anything
+│   │   ├── scene
+│   │   ├── split_task.py
+│   │   └── task_gen.py
+│   ├── NavModel
+│   │   ├── LLMModel
+│   │   └── RandomNav.py
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── sft.py
+│   ├── static
+│   │   ├── css
+│   │   ├── images
+│   │   ├── js
+│   │   ├── pdfs
+│   │   └── videos
+│   ├── train.py
+│   └── utils
+│       ├── agent.py
+│       ├── common_utils.py
+│       ├── dataset.py
+│       ├── distributed.py
+│       ├── __init__.py
+│       ├── metrics.py
+│       ├── optims.py
+│       ├── parser.py
+│       └── SFT_agent.py
+├── libforce_egl_device.so
+├── my_project_tree.txt
+├── python patch_habitat_egl.py
+├── README.md
+├── scripts
+│   ├── Ablation_study_runnner.py
+│   ├── debug_tsdf_map.ply
+│   ├── draw_2d_topology.py
+│   ├── Evaluate.py
+│   ├── Evaluate_SPL&OSR.py
+│   ├── evaluation.txt
+│   ├── experience_memory_enhanced.py
+│   ├── experience_memory.py
+│   ├── final_evaluation_results.txt
+│   ├── post_process_results.py
+│   ├── render_hierarchical_dsg.py
+│   ├── run_ablation.sh
+│   ├── run_log_20260429_111309.txt
+│   ├── run_vlm_planner_eqa_stretch.py
+│   ├── run_vlm_planner_hmeqa_habitat_backup.py
+│   ├── run_vlm_planner_hmeqa_habitat.py
+│   ├── run_vlm_planner_lhprvln_habitat_backup.py
+│   ├── run_vlm_planner_openeqa_habitat.py
+│   ├── test_llama.py
+│   ├── viewer3.25.py
+│   ├── viewer4.29.py
+│   ├── viewer5.4.py
+│   ├── viewer_backup.py
+│   ├── viewer.py
+│   ├── vis_pc.py
+│   └── visualizer.py
+├── setup.py
+└── tests
+    └── test_random_exp_habitat.py
+
+42 directories, 148 files

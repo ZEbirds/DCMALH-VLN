@@ -47,3 +47,12 @@ ipython_config.py
 outputs
 media
 wandb
+
+outputs/
+tests/
+data/
+doc/
+LH-VLN/
+habitat-sim/
+grapheqa_data_backup/
+graph_eqa.egg-info/
