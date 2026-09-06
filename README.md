@@ -12,55 +12,65 @@ This project proposes a Dual-Channel Memory Architecture combining a Hierarchica
 
 ## Demonstrations
 
-> *All execution runs demonstrate zero-shot long-horizon vision-language navigation trajectories on unseen HM3D environments.*
+> *All execution runs demonstrate zero-shot long-horizon vision-language navigation (LHPR-VLN) trajectories on unseen HM3D environments.*
 
-### Case 1: [Replace with Target Instruction, e.g., "Go to the kitchen refrigerator"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/demo.mp4" controls="controls" width="100%"></video>
-
----
-
-### Case 2: [Replace with Target Instruction, e.g., "Navigate to the wooden desk in study room"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/6_00706-YHmAkqgwe2p__execution.mp4" controls="controls" width="100%"></video>
+### Case 1: Long-Horizon Pick-and-Place (Liquid Soap & Refrigerator)
+[![Demo 1](https://img.youtube.com/vi/QWZLfyjmAPs/0.jpg)](https://www.youtube.com/watch?v=QWZLfyjmAPs)  
+*▶️ Click image to watch on YouTube*
 
 ---
 
-### Case 3: [Replace with Target Instruction, e.g., "Find the dining table near living room"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/13_00741-w8GiikYuFRk__execution.mp4" controls="controls" width="100%"></video>
+### Case 2: Multi-Room Exploration & Towel Retrieval
+[![Demo 2](https://img.youtube.com/vi/5Kv-p34u5fI/0.jpg)](https://www.youtube.com/watch?v=5Kv-p34u5fI)  
+*▶️ Click image to watch on YouTube*
 
 ---
 
-### Case 4: [Replace with Target Instruction, e.g., "Head towards the bedroom wardrobe"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/26_00087-YY8rqV6L6rf__execution.mp4" controls="controls" width="100%"></video>
+### Case 3: Complex Heritage Scene Navigation (Vase & Desk)
+[![Demo 3](https://img.youtube.com/vi/HzB61G3deFE/0.jpg)](https://www.youtube.com/watch?v=HzB61G3deFE)  
+*▶️ Click image to watch on YouTube*
 
 ---
 
-### Case 5: [Replace with Target Instruction, e.g., "Locate the armchair beside bookshelf"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/38_00680-YmWinf3mhb5__execution.mp4" controls="controls" width="100%"></video>
+### Case 4: Long-Horizon Trajectory Execution 4
+[![Demo 4](https://img.youtube.com/vi/hznD20m3eFA/0.jpg)](https://www.youtube.com/watch?v=hznD20m3eFA)  
+*▶️ Click image to watch on YouTube*
 
 ---
 
-### Case 6: [Replace with Target Instruction, e.g., "Navigate to the bathroom washbasin"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/56_00696-DsEJeNPcZtE__execution.mp4" controls="controls" width="100%"></video>
+### Case 5: Long-Horizon Trajectory Execution 5
+[![Demo 5](https://img.youtube.com/vi/va_C_lyXiMM/0.jpg)](https://www.youtube.com/watch?v=va_C_lyXiMM)  
+*▶️ Click image to watch on YouTube*
 
 ---
 
-### Case 7: [Replace with Target Instruction, e.g., "Walk to the hallway entrance console"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/66_00746-RTV2n6fXB2w__execution.mp4" controls="controls" width="100%"></video>
+### Case 6: Long-Horizon Trajectory Execution 6
+[![Demo 6](https://img.youtube.com/vi/LCVSZ3UY6Rk/0.jpg)](https://www.youtube.com/watch?v=LCVSZ3UY6Rk)  
+*▶️ Click image to watch on YouTube*
 
 ---
 
-### Case 8: [Replace with Target Instruction, e.g., "Find the coffee table in front of couch"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/74_00272-kA2nG18hCAr__execution.mp4" controls="controls" width="100%"></video>
+### Case 7: Long-Horizon Trajectory Execution 7
+[![Demo 7](https://img.youtube.com/vi/fyASYlE4weM/0.jpg)](https://www.youtube.com/watch?v=fyASYlE4weM)  
+*▶️ Click image to watch on YouTube*
 
 ---
 
-### Case 9: [Replace with Target Instruction, e.g., "Navigate to the balcony sliding door"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/91_00643-ggNAcMh8JPT__execution.mp4" controls="controls" width="100%"></video>
+### Case 8: Long-Horizon Trajectory Execution 8
+[![Demo 8](https://img.youtube.com/vi/q-PdhDyapjg/0.jpg)](https://www.youtube.com/watch?v=q-PdhDyapjg)  
+*▶️ Click image to watch on YouTube*
 
 ---
 
-### Case 10: [Replace with Target Instruction, e.g., "Reach the kitchen sink and stop"]
-<video src="https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/9_00245-741Fdj7NLF9__execution.mp4.mp4" controls="controls" width="100%"></video>
+### Case 9: Long-Horizon Trajectory Execution 9
+[![Demo 9](https://img.youtube.com/vi/UQvHFW2uC7Y/0.jpg)](https://www.youtube.com/watch?v=UQvHFW2uC7Y)  
+*▶️ Click image to watch on YouTube*
+
+---
+
+### Case 10: Long-Horizon Trajectory Execution 10
+[![Demo 10](https://img.youtube.com/vi/4PXpkbITPnQ/0.jpg)](https://www.youtube.com/watch?v=4PXpkbITPnQ)  
+*▶️ Click image to watch on YouTube*
 
 ## Resources
 
