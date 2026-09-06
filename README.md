@@ -10,24 +10,60 @@ This repository contains the official implementation of the dissertation: *Dual-
 
 This project proposes a Dual-Channel Memory Architecture combining a Hierarchical 3D Semantic Scene Graph and Vectorized Experience Memory for zero-shot long-horizon vision-language navigation. By maintaining both a topological understanding of the environment and a vectorized history of navigation experiences, our agent significantly reduces exploration redundancy and improves zero-shot planning capabilities in complex, unseen environments.
 
+## Demonstrations
+
+> *All execution runs demonstrate zero-shot long-horizon vision-language navigation trajectories on unseen HM3D environments.*
+
+### Case 1: [Replace with Target Instruction, e.g., "Go to the kitchen refrigerator"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/demo.mp4
+
+---
+
+### Case 2: [Replace with Target Instruction, e.g., "Navigate to the wooden desk in study room"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/6_00706-YHmAkqgwe2p__execution.mp4
+
+---
+
+### Case 3: [Replace with Target Instruction, e.g., "Find the dining table near living room"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/13_00741-w8GiikYuFRk__execution.mp4
+
+---
+
+### Case 4: [Replace with Target Instruction, e.g., "Head towards the bedroom wardrobe"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/26_00087-YY8rqV6L6rf__execution.mp4
+
+---
+
+### Case 5: [Replace with Target Instruction, e.g., "Locate the armchair beside bookshelf"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/38_00680-YmWinf3mhb5__execution.mp4
+
+---
+
+### Case 6: [Replace with Target Instruction, e.g., "Navigate to the bathroom washbasin"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/56_00696-DsEJeNPcZtE__execution.mp4
+
+---
+
+### Case 7: [Replace with Target Instruction, e.g., "Walk to the hallway entrance console"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/66_00746-RTV2n6fXB2w__execution.mp4
+
+---
+
+### Case 8: [Replace with Target Instruction, e.g., "Find the coffee table in front of couch"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/74_00272-kA2nG18hCAr__execution.mp4
+
+---
+
+### Case 9: [Replace with Target Instruction, e.g., "Navigate to the balcony sliding door"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/91_00643-ggNAcMh8JPT__execution.mp4
+
+---
+
+### Case 10: [Replace with Target Instruction, e.g., "Reach the kitchen sink and stop"]
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/9_00245-741Fdj7NLF9__execution.mp4.mp4
+
 ## Resources
 
-<details open>
-<summary><b>Click to expand / collapse 9 Navigation Execution Trajectories</b></summary>
-
-| Scene ID | Video Demonstration (.mp4) | Animation Preview (.gif) |
-| :--- | :--- | :--- |
-| **Scene 00706** (`YHmAkqgwe2p`) | [▶️ Watch Video (85.1MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/6_00706-YHmAkqgwe2p__execution.mp4) | [GIF (51.0MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/6_00706-YHmAkqgwe2p__execution.gif) |
-| **Scene 00741** (`w8GiikYuFRk`) | [▶️ Watch Video (22.5MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/13_00741-w8GiikYuFRk__execution.mp4) | [GIF (16.6MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/13_00741-w8GiikYuFRk__execution.gif) |
-| **Scene 00087** (`YY8rqV6L6rf`) | [▶️ Watch Video (40.1MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/26_00087-YY8rqV6L6rf__execution.mp4) | [GIF (27.8MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/26_00087-YY8rqV6L6rf__execution.gif) |
-| **Scene 00680** (`YmWinf3mhb5`) | [▶️ Watch Video (26.8MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/38_00680-YmWinf3mhb5__execution.mp4) | [GIF (18.3MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/38_00680-YmWinf3mhb5__execution.gif) |
-| **Scene 00696** (`DsEJeNPcZtE`) | [▶️ Watch Video (29.0MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/56_00696-DsEJeNPcZtE__execution.mp4) | [GIF (20.4MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/56_00696-DsEJeNPcZtE__execution.gif) |
-| **Scene 00746** (`RTV2n6fXB2w`) | [▶️ Watch Video (18.7MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/66_00746-RTV2n6fXB2w__execution.mp4) | [GIF (15.3MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/66_00746-RTV2n6fXB2w__execution.gif) |
-| **Scene 00272** (`kA2nG18hCAr`) | [▶️ Watch Video (11.7MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/74_00272-kA2nG18hCAr__execution.mp4) | [GIF (8.4MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/74_00272-kA2nG18hCAr__execution.gif) |
-| **Scene 00643** (`ggNAcMh8JPT`) | [▶️ Watch Video (9.57MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/91_00643-ggNAcMh8JPT__execution.mp4) | [GIF (6.7MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/91_00643-ggNAcMh8JPT__execution.gif) |
-| **Scene 00245** (`741Fdj7NLF9`) | [▶️ Watch Video (35.3MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/9_00245-741Fdj7NLF9__execution.mp4.mp4) | [GIF (23.7MB)](https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/9_00245-741Fdj7NLF9__execution.mp4.gif) |
-
-</details>
 * [Download Poster](https://github.com/ZEbirds/DCMALH-VLN/blob/main/poster.pptx)
 * [Download Dissertation](https://github.com/ZEbirds/DCMALH-VLN/blob/main/thesis.pdf)
 
