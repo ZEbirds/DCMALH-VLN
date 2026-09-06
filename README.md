@@ -15,52 +15,52 @@ This project proposes a Dual-Channel Memory Architecture combining a Hierarchica
 > *All execution runs demonstrate zero-shot long-horizon vision-language navigation trajectories on unseen HM3D environments.*
 
 ### Case 1: [Replace with Target Instruction, e.g., "Go to the kitchen refrigerator"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/demo.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/demo.mp4
 
 ---
 
 ### Case 2: [Replace with Target Instruction, e.g., "Navigate to the wooden desk in study room"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/6_00706-YHmAkqgwe2p__execution.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/6_00706-YHmAkqgwe2p__execution.mp4
 
 ---
 
 ### Case 3: [Replace with Target Instruction, e.g., "Find the dining table near living room"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/13_00741-w8GiikYuFRk__execution.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/13_00741-w8GiikYuFRk__execution.mp4
 
 ---
 
 ### Case 4: [Replace with Target Instruction, e.g., "Head towards the bedroom wardrobe"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/26_00087-YY8rqV6L6rf__execution.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/26_00087-YY8rqV6L6rf__execution.mp4
 
 ---
 
 ### Case 5: [Replace with Target Instruction, e.g., "Locate the armchair beside bookshelf"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/38_00680-YmWinf3mhb5__execution.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/38_00680-YmWinf3mhb5__execution.mp4
 
 ---
 
 ### Case 6: [Replace with Target Instruction, e.g., "Navigate to the bathroom washbasin"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/56_00696-DsEJeNPcZtE__execution.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/56_00696-DsEJeNPcZtE__execution.mp4
 
 ---
 
 ### Case 7: [Replace with Target Instruction, e.g., "Walk to the hallway entrance console"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/66_00746-RTV2n6fXB2w__execution.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/66_00746-RTV2n6fXB2w__execution.mp4
 
 ---
 
 ### Case 8: [Replace with Target Instruction, e.g., "Find the coffee table in front of couch"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/74_00272-kA2nG18hCAr__execution.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/74_00272-kA2nG18hCAr__execution.mp4
 
 ---
 
 ### Case 9: [Replace with Target Instruction, e.g., "Navigate to the balcony sliding door"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/91_00643-ggNAcMh8JPT__execution.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/91_00643-ggNAcMh8JPT__execution.mp4
 
 ---
 
 ### Case 10: [Replace with Target Instruction, e.g., "Reach the kitchen sink and stop"]
-https://github.com/ZEbirds/DCMALH-VLN/releases/download/v1.0.0/9_00245-741Fdj7NLF9__execution.mp4.mp4
+https://github.com/ZEbirds/DCMALH-VLN/releases/download/v0.1.0/9_00245-741Fdj7NLF9__execution.mp4.mp4
 
 ## Resources
 
