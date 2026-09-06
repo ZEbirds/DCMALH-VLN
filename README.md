@@ -13,8 +13,8 @@ This project proposes a Dual-Channel Memory Architecture combining a Hierarchica
 ## Resources
 
 * [Demo Video](https://www.google.com/search?q=%23)
-* [Download Poster](https://www.google.com/search?q=%23)
-* [Download Dissertation](https://www.google.com/search?q=%23)
+* [Download Poster](https://github.com/ZEbirds/DCMALH-VLN/blob/main/poster.pptx)
+* [Download Dissertation](https://github.com/ZEbirds/DCMALH-VLN/blob/main/thesis.pdf)
 
 *(Links will be updated upon publication)*
 
