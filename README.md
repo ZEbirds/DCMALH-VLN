@@ -16,61 +16,51 @@ This project proposes a Dual-Channel Memory Architecture combining a Hierarchica
 
 ### Case 1: Long-Horizon Pick-and-Place (Liquid Soap & Refrigerator)
 [![Demo 1](https://img.youtube.com/vi/QWZLfyjmAPs/0.jpg)](https://www.youtube.com/watch?v=QWZLfyjmAPs)  
-*▶️ Click image to watch on YouTube*
 
 ---
 
 ### Case 2: Multi-Room Exploration & Towel Retrieval
 [![Demo 2](https://img.youtube.com/vi/5Kv-p34u5fI/0.jpg)](https://www.youtube.com/watch?v=5Kv-p34u5fI)  
-*▶️ Click image to watch on YouTube*
 
 ---
 
 ### Case 3: Complex Heritage Scene Navigation (Vase & Desk)
 [![Demo 3](https://img.youtube.com/vi/HzB61G3deFE/0.jpg)](https://www.youtube.com/watch?v=HzB61G3deFE)  
-*▶️ Click image to watch on YouTube*
 
 ---
 
 ### Case 4: Long-Horizon Trajectory Execution 4
 [![Demo 4](https://img.youtube.com/vi/hznD20m3eFA/0.jpg)](https://www.youtube.com/watch?v=hznD20m3eFA)  
-*▶️ Click image to watch on YouTube*
 
 ---
 
 ### Case 5: Long-Horizon Trajectory Execution 5
 [![Demo 5](https://img.youtube.com/vi/va_C_lyXiMM/0.jpg)](https://www.youtube.com/watch?v=va_C_lyXiMM)  
-*▶️ Click image to watch on YouTube*
 
 ---
 
 ### Case 6: Long-Horizon Trajectory Execution 6
 [![Demo 6](https://img.youtube.com/vi/LCVSZ3UY6Rk/0.jpg)](https://www.youtube.com/watch?v=LCVSZ3UY6Rk)  
-*▶️ Click image to watch on YouTube*
 
 ---
 
 ### Case 7: Long-Horizon Trajectory Execution 7
 [![Demo 7](https://img.youtube.com/vi/fyASYlE4weM/0.jpg)](https://www.youtube.com/watch?v=fyASYlE4weM)  
-*▶️ Click image to watch on YouTube*
 
 ---
 
 ### Case 8: Long-Horizon Trajectory Execution 8
 [![Demo 8](https://img.youtube.com/vi/q-PdhDyapjg/0.jpg)](https://www.youtube.com/watch?v=q-PdhDyapjg)  
-*▶️ Click image to watch on YouTube*
 
 ---
 
 ### Case 9: Long-Horizon Trajectory Execution 9
 [![Demo 9](https://img.youtube.com/vi/UQvHFW2uC7Y/0.jpg)](https://www.youtube.com/watch?v=UQvHFW2uC7Y)  
-*▶️ Click image to watch on YouTube*
 
 ---
 
 ### Case 10: Long-Horizon Trajectory Execution 10
 [![Demo 10](https://img.youtube.com/vi/4PXpkbITPnQ/0.jpg)](https://www.youtube.com/watch?v=4PXpkbITPnQ)  
-*▶️ Click image to watch on YouTube*
 
 ## Resources
 
