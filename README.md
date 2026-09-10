@@ -12,55 +12,15 @@ This project proposes a Dual-Channel Memory Architecture combining a Hierarchica
 
 ## Demonstrations
 
-> *All execution runs demonstrate zero-shot long-horizon vision-language navigation (LHPR-VLN) trajectories on unseen HM3D environments.*
+> Click any thumbnail below to watch the corresponding execution trajectory on YouTube.
 
-### Case 1: Long-Horizon Pick-and-Place (Liquid Soap & Refrigerator)
-[![Demo 1](https://img.youtube.com/vi/QWZLfyjmAPs/0.jpg)](https://www.youtube.com/watch?v=QWZLfyjmAPs)  
-
----
-
-### Case 2: Multi-Room Exploration & Towel Retrieval
-[![Demo 2](https://img.youtube.com/vi/5Kv-p34u5fI/0.jpg)](https://www.youtube.com/watch?v=5Kv-p34u5fI)  
-
----
-
-### Case 3: Complex Heritage Scene Navigation (Vase & Desk)
-[![Demo 3](https://img.youtube.com/vi/HzB61G3deFE/0.jpg)](https://www.youtube.com/watch?v=HzB61G3deFE)  
-
----
-
-### Case 4: Long-Horizon Trajectory Execution 4
-[![Demo 4](https://img.youtube.com/vi/hznD20m3eFA/0.jpg)](https://www.youtube.com/watch?v=hznD20m3eFA)  
-
----
-
-### Case 5: Long-Horizon Trajectory Execution 5
-[![Demo 5](https://img.youtube.com/vi/va_C_lyXiMM/0.jpg)](https://www.youtube.com/watch?v=va_C_lyXiMM)  
-
----
-
-### Case 6: Long-Horizon Trajectory Execution 6
-[![Demo 6](https://img.youtube.com/vi/LCVSZ3UY6Rk/0.jpg)](https://www.youtube.com/watch?v=LCVSZ3UY6Rk)  
-
----
-
-### Case 7: Long-Horizon Trajectory Execution 7
-[![Demo 7](https://img.youtube.com/vi/fyASYlE4weM/0.jpg)](https://www.youtube.com/watch?v=fyASYlE4weM)  
-
----
-
-### Case 8: Long-Horizon Trajectory Execution 8
-[![Demo 8](https://img.youtube.com/vi/q-PdhDyapjg/0.jpg)](https://www.youtube.com/watch?v=q-PdhDyapjg)  
-
----
-
-### Case 9: Long-Horizon Trajectory Execution 9
-[![Demo 9](https://img.youtube.com/vi/UQvHFW2uC7Y/0.jpg)](https://www.youtube.com/watch?v=UQvHFW2uC7Y)  
-
----
-
-### Case 10: Long-Horizon Trajectory Execution 10
-[![Demo 10](https://img.youtube.com/vi/4PXpkbITPnQ/0.jpg)](https://www.youtube.com/watch?v=4PXpkbITPnQ)  
+| Trajectory Demo (Part 1) | Trajectory Demo (Part 2) |
+| :---: | :---: |
+| [![Demo 1](https://img.youtube.com/vi/QWZLfyjmAPs/mqdefault.jpg)](https://www.youtube.com/watch?v=QWZLfyjmAPs)<br>▶️ **[Case 01](https://www.youtube.com/watch?v=QWZLfyjmAPs)** | [![Demo 2](https://img.youtube.com/vi/5Kv-p34u5fI/mqdefault.jpg)](https://www.youtube.com/watch?v=5Kv-p34u5fI)<br>▶️ **[Case 02](https://www.youtube.com/watch?v=5Kv-p34u5fI)** |
+| [![Demo 3](https://img.youtube.com/vi/HzB61G3deFE/mqdefault.jpg)](https://www.youtube.com/watch?v=HzB61G3deFE)<br>▶️ **[Case 03](https://www.youtube.com/watch?v=HzB61G3deFE)** | [![Demo 4](https://img.youtube.com/vi/hznD20m3eFA/mqdefault.jpg)](https://www.youtube.com/watch?v=hznD20m3eFA)<br>▶️ **[Case 04](https://www.youtube.com/watch?v=hznD20m3eFA)** |
+| [![Demo 5](https://img.youtube.com/vi/va_C_lyXiMM/mqdefault.jpg)](https://www.youtube.com/watch?v=va_C_lyXiMM)<br>▶️ **[Case 05](https://www.youtube.com/watch?v=va_C_lyXiMM)** | [![Demo 6](https://img.youtube.com/vi/LCVSZ3UY6Rk/mqdefault.jpg)](https://www.youtube.com/watch?v=LCVSZ3UY6Rk) <br>▶️ **[Case 06](https://www.youtube.com/watch?v=LCVSZ3UY6Rk)** |
+| [![Demo 7](https://img.youtube.com/vi/fyASYlE4weM/mqdefault.jpg)](https://www.youtube.com/watch?v=fyASYlE4weM)<br>▶️ **[Case 07](https://www.youtube.com/watch?v=fyASYlE4weM)** | [![Demo 8](https://img.youtube.com/vi/q-PdhDyapjg/mqdefault.jpg)](https://www.youtube.com/watch?v=q-PdhDyapjg)<br>▶️ **[Case 08](https://www.youtube.com/watch?v=q-PdhDyapjg)** |
+| [![Demo 9](https://img.youtube.com/vi/UQvHFW2uC7Y/mqdefault.jpg)](https://www.youtube.com/watch?v=UQvHFW2uC7Y)<br>▶️ **[Case 09](https://www.youtube.com/watch?v=UQvHFW2uC7Y)** | [![Demo 10](https://img.youtube.com/vi/4PXpkbITPnQ/mqdefault.jpg)](https://www.youtube.com/watch?v=4PXpkbITPnQ)<br>▶️ **[Case 10](https://www.youtube.com/watch?v=4PXpkbITPnQ)** |
 
 ## Resources
 
