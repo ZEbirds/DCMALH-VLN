@@ -1,41 +1,298 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DCMA-LH-VLN</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCMALH-VLN | Dual-Channel Memory Architecture</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #333333;
+            --text-light: #666666;
+            --accent-color: #0f766e;
+            --border-color: #e5e7eb;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-serif: "Georgia", "Times New Roman", serif;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            line-height: 1.3;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .authors {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .authors strong {
+            color: var(--accent-color);
+        }
+
+        .affiliations {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        /* Action Buttons */
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background-color: #f3f4f6;
+            color: #374151;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .link-btn:hover {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+
+        /* Abstract Section */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        .abstract-text {
+            font-size: 1.05rem;
+            color: #4b5563;
+            text-align: justify;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .video-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-title {
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #374151;
+            text-align: center;
+            background: #f9fafb;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
 <body>
 
-<h1>
-Dual-Channel Memory Architecture for Zero-shot Long-Horizon VLN
-</h1>
+    <div class="container">
+        
+        <!-- Header & Title -->
+        <header class="header">
+            <h1>Dual-Channel Memory Architecture for<br>Zero-shot Long-Horizon VLN</h1>
+            <div class="subtitle">Final Year Project</div>
+            
+            <div class="authors">
+                <strong>Zibo Zheng</strong>
+            </div>
+            
+            <div class="affiliations">
+                University of Nottingham Ningbo China
+            </div>
 
-<p>
-Final Year Project
-</p>
+            <div class="links">
+                <a href="https://github.com/ZEbirds/DCMALH-VLN" class="link-btn" target="_blank">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Code
+                </a>
+                <a href="thesis.pdf" class="link-btn" target="_blank">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2.5L17.5 9H13V4.5zM6 20V4h5v7h7v9H6z"/></svg>
+                    Dissertation
+                </a>
+                <a href="poster.pdf" class="link-btn" target="_blank">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
+                    Poster
+                </a>
+            </div>
+        </header>
 
-<h2>Abstract</h2>
+        <!-- Abstract Section -->
+        <section class="section">
+            <h2>Abstract</h2>
+            <p class="abstract-text">
+                This project proposes a Dual-Channel Memory Architecture combining a Hierarchical 3D Semantic Scene Graph and Vectorized Experience Memory for zero-shot long-horizon vision-language navigation. By maintaining both a topological understanding of the environment and a vectorized history of navigation experiences, our agent significantly reduces exploration redundancy and improves zero-shot planning capabilities in complex, unseen environments.
+            </p>
+        </section>
 
-<p>
-This project proposes a Dual-Channel Memory Architecture
-combining a Hierarchical 3D Semantic Scene Graph and
-Vectorized Experience Memory for zero-shot long-horizon
-vision-language navigation.
-</p>
+        <!-- Demonstrations Section -->
+        <section class="section">
+            <h2>Execution Trajectories</h2>
+            <div class="video-grid">
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/QWZLfyjmAPs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 01: Instruction Title Here</div>
+                </div>
 
-<h2>Demo Video</h2>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/5Kv-p34u5fI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 02: Instruction Title Here</div>
+                </div>
 
-<video width="900" controls>
-  <source src="demo.mp4" type="video/mp4">
-</video>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/HzB61G3deFE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 03: Instruction Title Here</div>
+                </div>
 
-<h2>Poster</h2>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/hznD20m3eFA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 04: Instruction Title Here</div>
+                </div>
 
-<a href="poster.pdf">Download Poster</a>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/va_C_lyXiMM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 05: Instruction Title Here</div>
+                </div>
 
-<h2>Dissertation</h2>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/LCVSZ3UY6Rk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 06: Instruction Title Here</div>
+                </div>
 
-<a href="thesis.pdf">Download Dissertation</a>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/fyASYlE4weM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 07: Instruction Title Here</div>
+                </div>
 
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/q-PdhDyapjg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 08: Instruction Title Here</div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/UQvHFW2uC7Y" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 09: Instruction Title Here</div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/4PXpkbITPnQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title">Case 10: Instruction Title Here</div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
 </body>
 </html>
